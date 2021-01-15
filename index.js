@@ -15,8 +15,6 @@ app.use(bodyParser.json());
 app.get('/options/:ticket', (req, res) => {
 	const ticket = req.params.ticket;
 	let date = moment();
-	console.log(date.hour())
-	console.log(date.day())
 	if (date.day() == 0) { 
 		date = date.subtract(1, 'days');
 	} else if (date.day() == 6) {
