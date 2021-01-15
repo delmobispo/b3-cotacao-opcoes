@@ -14,12 +14,20 @@ app.use(bodyParser.json());
 
 app.get('/options/:ticket', (req, res) => {
 	const ticket = req.params.ticket;
-	const date = moment().format('YYYY-MM-DD');
-	unirest.get(`${b3Url}/${ticket}/${date}`)
+	let date = moment();
+	console.log(date.hour())
+	console.log(date.day())
+	if (date.day() == 0) { 
+		date = date.subtract(1, 'days');
+	} else if (date.day() == 6) {
+		date = date.subtract(2, 'days');
+	} else if (date.hour() < 11) {
+		date = date.subtract(1, 'days');
+	}
+	unirest.get(`${b3Url}/${ticket}/${date.format('YYYY-MM-DD')}`)
 		.headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
 		.then((response) => {
 			const result = response.body;
-			console.log(result);
 			if (!result || result.values.length == 0)
 				return res.status(404).json({
 					status: 404,
