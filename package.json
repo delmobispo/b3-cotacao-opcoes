@@ -1,6 +1,6 @@
 {
   "name": "opcoes-cotacao-b3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pega cotação das opções na B3",
   "main": "index.js",
   "scripts": {
